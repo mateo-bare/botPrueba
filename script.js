@@ -29,6 +29,18 @@ function openWhatsAppChat(phoneNumber, message) {
     window.open(whatsappLink, "_blank");
 }
 
+function getOptionsForItem(item) {
+    console.log(item)
+    switch (item) {
+        case "At.Cliente":
+            return ["Motrador Quilmes", "Mostrador Berazategui", "Ventas Industriaes", "At.Personalizada"];
+        case "At.Proveedores":
+            return ["Dpto.Compras", "Pago a Proveedores"];
+        default:
+            return [];
+    }
+
+}
 function handleOptionClick(index) {
     const selectedOption = options[index];
     appendMessage(selectedOption, "user");
@@ -41,7 +53,7 @@ function handleOptionClick(index) {
             const itemOptions = getOptionsForItem(selectedOption);
             showOptions(itemOptions);
         }, 500);
-    } else if (selectedOption.startsWith("At.Cliente")) {
+    } else if (selectedOption.startsWith("Mostrador Quuilmes")) {
         const itemName = selectedOption.toLowerCase().replace(/\s/g, "-");
         const whatsappLink = `https://api.whatsapp.com/send?phone=1165970420&text=¡Hola! Estoy interesado en ${itemName}. ¿Puede proporcionarme más información?`;
         window.open(whatsappLink, "_blank");
@@ -68,18 +80,6 @@ function handleOptionClick(index) {
 }
 
 
-function getOptionsForItem(item) {
-    console.log(item)
-    switch (item) {
-        case "At.Cliente":
-            return ["Motrador Quilmes", "Mostrador Berazategui", "Ventas Industriaes", "At.Personalizada"];
-        case "At.Proveedores":
-            return ["Dpto.Compras", "Pago a Proveedores"];
-        default:
-            return [];
-    }
-
-}
 
 const options = ["At.Cliente", "At.proveedores", "Dpto.Tecnico"];
 let optionsShown = false;
