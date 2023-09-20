@@ -54,6 +54,7 @@ function handleOptionClick(index) {
         showOptions(list)
     }else if (selectedOption === "dpto.tecnico") {
         handleSecondaryOption(selectedOption);
+        openWhatsAppChat(1165970420, "hola")
     }else{
         alert("Error")
     }
@@ -80,18 +81,14 @@ function getOptionsForItem(item) {
     // Función para manejar elecciones secundarias y redirigir a WhatsApp
     function handleSecondaryOption(option) {
         console.log("handleSecondary: ", option)
+        getOptionsForItem
         switch (option) {
             
             case "mostrador quilmes":
-                const phoneNumber = "1165970420"; // Reemplaza con el número de teléfono de Mostrador Quilmes
-                const message = "¡Hola! Estoy interesado en Mostrador Quilmes. ¿Puede proporcionarme más información?";
-                const encodedMessage = encodeURIComponent(message);
-                const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodedMessage}`;
-                window.open(whatsappLink, "_blank");
-                break;
-                case "at.cliente":
+             openWhatsAppChat(1161667138, "hola, estoy interesado en sus productos y quisiera comunicarme con el Mostrador de Quilmes por favor")
+            case "at.cliente":
                     return getOptionsForItem(option)
-                default:
+            default:
                 // Si no hay coincidencia, no hacemos nada especial
                 break;
         }
