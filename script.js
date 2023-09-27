@@ -15,8 +15,9 @@ function appendMessage(message, sender) {
     messageDiv.innerText = message;
     chatLog.appendChild(messageDiv);
     chatLog.scrollTop = chatLog.scrollHeight;
-}
 
+  
+}
 
 function showOptions(options) {
     const optionsDiv = document.createElement("div");
@@ -40,31 +41,27 @@ function handleOptionClick(index) {
     console.log("Opción seleccionada:", selectedOption);
 
     appendMessage(selectedOption, "user");
-
+    console.log("Opción seleccionada:", index);
     const secondaryOptionsForSelected = secondaryOptions[selectedOption];
    
     if (secondaryOptionsForSelected) {
-        console.log("Opciones secundarias para", selectedOption, ":", secondaryOptionsForSelected);
         showOptions(secondaryOptionsForSelected)
-
+        console.log(secondaryOptionsForSelected)
     } else{
         switch (selectedOption) {
             case "Dpto.Tecnico":
                 openWhatsAppChat(1165970420, "Hola, necesito asistencia técnica.");
                 break;
-
+            case undefined:
+                openWhatsAppChat(1165970420, "hola quisiera atencion persionalizada")
+                break;
             default:
                 console.log("Acción no definida para la opción seleccionada:", selectedOption);
                 break;
         }
     }
 };
-    
-    // Eliminar las opciones después de la respuesta del bot
-    const optionsDiv = document.querySelector(".options");
-    if (optionsDiv) {
-        optionsDiv.parentNode.removeChild(optionsDiv);
-    }
+
 
     // Función para manejar elecciones secundarias y redirigir a WhatsApp
     function handleSecondaryOption(option) {
