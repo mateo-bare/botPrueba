@@ -2,6 +2,11 @@ const chatLog = document.getElementById("chat-log");
 const userInput = document.getElementById("user-input");
 
 
+const options = ["At.Cliente", "At.Proveedores", "Dpto.Tecnico"];
+const secondaryOptions = {
+"At.Cliente": ["Mostrador Quilmes", "Mostrador Berazategui", "Ventas Industriales", "At.Personalizada"],
+"At.Proveedores": ["Pago Proveedores", "Ventas Proveedores"]
+};
 
 
 function appendMessage(message, sender) {
@@ -12,11 +17,6 @@ function appendMessage(message, sender) {
     chatLog.scrollTop = chatLog.scrollHeight;
 }
 
-const options = ["At.Cliente", "At.Proveedores", "Dpto.Tecnico"];
-//opciones secundarias de At cliente
-const secoptions = ["Mostrador Quilmes", "mostrador berazategui", "ventas industriaes", "at.personalizada"]
-//opciones secundarias de At proovedores
-const thdoptions = ["pago proveedores","ventas proveedores"]
 
 function showOptions(options) {
     const optionsDiv = document.createElement("div");
@@ -35,59 +35,44 @@ function showOptions(options) {
 
 
 function handleOptionClick(index) {
-    const selectedOption = options[index].toLowerCase(); // Convertir la opción a minúsculas
-    
+    const selectedOption = options[index];
+
+    console.log("Opción seleccionada:", selectedOption);
+
     appendMessage(selectedOption, "user");
-    
-    console.log(options)
-    console.log(index)
-    console.log("seleccionaste",selectedOption)
-    if (selectedOption === "at.cliente") {
-        console.log(options[index])
-        let list = handleSecondaryOption(selectedOption); // Llama a la función para redirigir a WhatsApp
-        showOptions(list)
 
-    } else if (selectedOption === "at.proveedores") {
-        let list = handleSecondaryOption(selectedOption);
-        showOptions(list)
+    const secondaryOptionsForSelected = secondaryOptions[selectedOption];
+   
+    if (secondaryOptionsForSelected) {
+        console.log("Opciones secundarias para", selectedOption, ":", secondaryOptionsForSelected);
+        showOptions(secondaryOptionsForSelected)
 
-    }else if (selectedOption === "dpto.tecnico") {
-        handleSecondaryOption(selectedOption);
-        openWhatsAppChat(1165970420, "hola")
-        
-    }else{
-        alert("error")
+    } else{
+        switch (selectedOption) {
+            case "Dpto.Tecnico":
+                openWhatsAppChat(1165970420, "Hola, necesito asistencia técnica.");
+                break;
+
+            default:
+                console.log("Acción no definida para la opción seleccionada:", selectedOption);
+                break;
+        }
     }
+};
     
     // Eliminar las opciones después de la respuesta del bot
     const optionsDiv = document.querySelector(".options");
     if (optionsDiv) {
         optionsDiv.parentNode.removeChild(optionsDiv);
     }
-}
 
-function getOptionsForItem(item) {
-    switch (item) {
-        case "at.cliente":
-            console.log("Item en get", item)
-            console.log("option en get", secoptions)
-            return secoptions
-            case "at.proveedores":
-                console.log(item)
-                return thdoptions
-        default:
-            return [];
-        }
-    }
     // Función para manejar elecciones secundarias y redirigir a WhatsApp
     function handleSecondaryOption(option) {
-        console.log("handleSecondary: ", option)
-        getOptionsForItem
+
         switch (option) {
-            case "at.cliente":
-                return getOptionsForItem(option)
-                case "at.proveedrores":
-                return getOptionsForItem(option)
+            case "Mostrador Quilmes":
+                openWhatsAppChat(1165970420, "mostrador sirve")
+            break;
             default:
                 // Si no hay coincidencia, no hacemos nada especial
                 break;
@@ -122,6 +107,5 @@ userInput.addEventListener("keyup", function(event) {
 
 /*Errores a reparar:
 arrelgar apariciones de opciones secundarias(ya que no aparecen)
-hacer que sea una ventana flotante
 darle un mejor diseño
 */
