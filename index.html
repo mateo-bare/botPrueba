@@ -4,14 +4,24 @@
     <link rel="stylesheet" href="styles.css ">
 </head>
 <body>
-    <button id="showChatButton">Mostrar Chat</button>
-    <div id="chatBox" class="hidden">
-        <div class="chat-container">
-            <div class="chat-log" id="chat-log">
-                <!-- Mensaje de bienvenida del bot -->
+<div class="contenedorCentrado" >
+    <button onclick="mostrarPopUp()"  class="botonConImagen"></button>
+</div>
+    <div id="popUp" class="popUp">
+        <div class="popUpContenido">
+            <span onclick="cerrarPopUp()" class="cerrar">&times;</span>
+
+            <div id="chatBox" class="hidden">
+                <div class="chat-container">
+                    <div class="chat-log" id="chat-log">
+                        <!-- Mensaje de bienvenida del bot -->
+                    </div>
+                    <input type="text" id="user-input" placeholder="Escribe aquí...">
+                </div>
+            
             </div>
-            <input type="text" id="user-input" placeholder="Escribe aquí...">
-        </div>
+          </div>
+
         <script src = "script.js"></script>
         <script src = "script2.js" ></script>
 </body>
