@@ -1,13 +1,11 @@
 const chatLog = document.getElementById("chat-log");
 const userInput = document.getElementById("user-input");
 
-
 const options = ["At.Cliente", "At.Proveedores", "Dpto.Tecnico"];
 const secondaryOptions = {
 "At.Cliente": ["Mostrador Quilmes", "Mostrador Berazategui", "Ventas Industriales", "At.Personalizada"],
 "At.Proveedores": ["Pago Proveedores", "Ventas Proveedores"]
 };
-
 
 function appendMessage(message, sender) {
     const messageDiv = document.createElement("div");
@@ -15,18 +13,16 @@ function appendMessage(message, sender) {
     messageDiv.innerText = message;
     chatLog.appendChild(messageDiv);
     chatLog.scrollTop = chatLog.scrollHeight;
-
-  
 }
 
-function showOptions(options) {
+function showOptions(options, isSecondary = false) {
     const optionsDiv = document.createElement("div");
     
     options.forEach((option, index) => {
         const optionButton = document.createElement("button");
         optionButton.className = "option-button";
         optionButton.innerText = option;
-        optionButton.addEventListener("click", () => handleOptionClick(index));
+        optionButton.addEventListener("click", isSecondary ? () => handleSecondaryOptionClick(option) : () => handleOptionClick(index));
         optionsDiv.appendChild(optionButton);
     });
     
@@ -34,33 +30,42 @@ function showOptions(options) {
     chatLog.scrollTop = chatLog.scrollHeight;
 }
 
+function handleSecondaryOptionClick(option) {
+    console.log("Opción secundaria seleccionada:", option);
+    appendMessage(option, "user");
+    handleSecondaryOption(option);
+}
+
 
 function handleOptionClick(index) {
     const selectedOption = options[index];
-
+    
     console.log("Opción seleccionada:", selectedOption);
-
+    
     appendMessage(selectedOption, "user");
     console.log("Opción seleccionada:", index);
+  
     const secondaryOptionsForSelected = secondaryOptions[selectedOption];
-   
-    if (secondaryOptionsForSelected) {
-        showOptions(secondaryOptionsForSelected)
-        console.log(secondaryOptionsForSelected)
-    } else{
+  
+    
+
         switch (selectedOption) {
             case "Dpto.Tecnico":
-                openWhatsAppChat(1165970420, "Hola, necesito asistencia técnica.");
+                openWhatsAppChat(+5491165970420, "Hola, necesito asistencia técnica.");
                 break;
             case undefined:
-                openWhatsAppChat(1165970420, "hola quisiera atencion persionalizada")
+                alert("undefined")
                 break;
             default:
-                console.log("Acción no definida para la opción seleccionada:", selectedOption);
+                if(secondaryOptionsForSelected){
+                    showOptions(secondaryOptionsForSelected, true);
+                }else{
+                    console.log("Acción no definida para la opción seleccionada:", selectedOption);
+                }   
                 break;
-        }
+            }
     }
-};
+
 
 
     // Función para manejar elecciones secundarias y redirigir a WhatsApp
@@ -68,10 +73,25 @@ function handleOptionClick(index) {
 
         switch (option) {
             case "Mostrador Quilmes":
-                openWhatsAppChat(1165970420, "mostrador sirve")
+                openWhatsAppChat(+5491165970420, "mostrador quilmes sirve")
             break;
+            case "Mostrador Berazategui":
+                openWhatsAppChat(+5491165970420, "mostrador bera sirve")
+                break;
+                case "Ventas Industriales":
+                    openWhatsAppChat(+5491165970420, "ventas industriales sirve")
+                    break;
+                case "At.Personalizada":
+                    openWhatsAppChat(+5491165970420, "atencion personalizada sirve")
+                    break;
+                case "Pago Proveedores":
+                    openWhatsAppChat(+5491165970420, "Pago a proveedores sirve")
+                    break;
+                case "Ventas Proveedores":
+                    openWhatsAppChat(+5491165970420, "ventas a proveedores sirve")
+                    break;
             default:
-                // Si no hay coincidencia, no hacemos nada especial
+                alert("Consultar error con el Programador")
                 break;
         }
     }
