@@ -123,6 +123,5 @@ userInput.addEventListener("keyup", function(event) {
 });
 
 /*Errores a reparar:
-arrelgar apariciones de opciones secundarias(ya que no aparecen)
 darle un mejor diseño
 */
