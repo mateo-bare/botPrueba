@@ -1,10 +1,10 @@
 const chatLog = document.getElementById("chat-log");
 const userInput = document.getElementById("user-input");
 
-const options = ["At.Cliente", "At.Proveedores", "Dpto.Tecnico"];
+const options = ["Atecion al Cliente", "Atencion a Proveedores", "Departamento Tecnico"];
 const secondaryOptions = {
-"At.Cliente": ["Mostrador Quilmes", "Mostrador Berazategui", "Ventas Industriales", "At.Personalizada"],
-"At.Proveedores": ["Pago Proveedores", "Ventas Proveedores"]
+"Atecion al Cliente": ["Mostrador Quilmes", "Mostrador Berazategui", "Ventas Industriales", "Atencion Personalizada"],
+"Atencion a Proveedores": ["Pago a Proveedores", "Compras a Proveedores"]
 };
 
 function appendMessage(message, sender) {
@@ -50,7 +50,7 @@ function handleOptionClick(index) {
     
 
         switch (selectedOption) {
-            case "Dpto.Tecnico":
+            case "Departamento Tecnico":
                 openWhatsAppChat(+5491165970420, "Hola, necesito asistencia técnica.");
                 break;
             case undefined:
@@ -73,22 +73,22 @@ function handleOptionClick(index) {
 
         switch (option) {
             case "Mostrador Quilmes":
-                openWhatsAppChat(+5491165970420, "mostrador quilmes sirve")
+                openWhatsAppChat(+5491161667138, "Hola quisiera consultar precios sobre algunos productos") //num de quilmes
             break;
             case "Mostrador Berazategui":
-                openWhatsAppChat(+5491165970420, "mostrador bera sirve")
+                openWhatsAppChat(+5491153539408, "Hola quisiera consultar precios sobre algunos productos") //num de bera
                 break;
                 case "Ventas Industriales":
-                    openWhatsAppChat(+5491165970420, "ventas industriales sirve")
+                    openWhatsAppChat(+5491165970420, "Hola quisiera que me hagas una cotizacion")   //num de jesus
                     break;
-                case "At.Personalizada":
-                    openWhatsAppChat(+5491165970420, "atencion personalizada sirve")
+                case "Atencion Personalizada":
+                    openWhatsAppChat(+5491165970420, "Hola quisiera comunicarme con algun empleado de administracion")  //num de ???
                     break;
-                case "Pago Proveedores":
-                    openWhatsAppChat(+5491165970420, "Pago a proveedores sirve")
+                case "Pago a Proveedores":
+                    openWhatsAppChat(+5491123295730, "Hola quisiera pagar/consultar alguna deuda vigente")  //num de carla
                     break;
-                case "Ventas Proveedores":
-                    openWhatsAppChat(+5491165970420, "ventas a proveedores sirve")
+                case "Compras a Proveedores":
+                    openWhatsAppChat(+54911, "ventas a proveedores sirve")  //num de jaz
                     break;
             default:
                 alert("Consultar error con el Programador")
@@ -106,7 +106,7 @@ function handleOptionClick(index) {
 let optionsShown = false;
 
 // Mensaje de bienvenida inicial
-appendMessage("¡Hola! Soy tu asistente virtual. ¿En qué puedo ayudarte hoy?", "bot");
+appendMessage("¡Hola! Soy tu asistente virtual, Dime con quien deseas comunicarte", "bot");
 userInput.addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
         const userMessage = userInput.value;
